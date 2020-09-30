@@ -50,14 +50,42 @@ window.addEventListener("resize", (function() {
     timer = setTimeout(newDimensions, 500);
 }),false);
 
-/* 7. Scroll */
-document.querySelectorAll("p").forEach(item => {
-    var pSize = item.style.fontSize;
-    item.addEventListener("dblclick", event => {
-        if (pSize = "1.6rem") {
-        pSize = "2rem";
-        } else {
-            pSize = "2rem";
-        }
+/* 7. Dblclick */
+const changeSize = e => {
+    const pTag = document.querySelector("p");
+    e.target.style.fontSize = "2rem";
+}
+const revertSize = () => {
+    const pTag = document.querySelector("p");
+    e.target.style.fontSize = "1.6rem";
+}
+const pTags = document.querySelectorAll("p");
+for (var i = 0; i < pTags.length; i++) {
+    pTags[i].addEventListener("dblclick", changeSize);
+}
+for (var i = 0; i < pTags.length; i++) {
+    pTags[i].addEventListener("dblclick", revertSize, true);
+}
+
+/* 8. Auxclick */
+const footDivs = document.querySelectorAll(".btn");
+
+footDivs.forEach(item => {
+    item.addEventListener("auxclick", event => {   
+        event.currentTarget.style.color = "purple";
+    }, false)
+});
+
+/* 9. Context Menu */
+document.querySelectorAll("section").forEach(item => {
+    item.addEventListener('contextmenu', event => {
+    event.preventDefault();
     })
 });
+
+/* 10. Key Up */
+document.querySelectorAll("img").forEach(item => {
+    item.addEventListener("keyup", event => {
+        item.style.border = "1px solid blue";
+    })
+})
